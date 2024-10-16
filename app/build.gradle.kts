@@ -38,6 +38,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        viewBinding=true
     }
 }
 
@@ -53,4 +54,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.firebase.bom)
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
