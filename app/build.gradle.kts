@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.fir.declarations.builder.buildScript
-import java.util.regex.Pattern.compile
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -42,6 +39,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -54,11 +52,12 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(platform(libs.firebase.bom))
-    implementation (libs.circleimageview)
+    implementation(libs.firebase.bom)
+    implementation ("com.google.android.gms:play-services-auth:20.5.0")
 
     // All:
     implementation (libs.cloudinary.android)
@@ -69,7 +68,8 @@ dependencies {
 
     implementation (libs.glide) // Check for the latest version
     kapt("com.github.bumptech.glide:compiler:4.15.1")
-//    compile("io.socket:socket.io-client:0.2.1")
 
+    //CircleImageVBiewer
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
 }

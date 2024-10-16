@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "391586904449",
+    "project_id": "recyclomate",
+    "storage_bucket": "recyclomate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391586904449:android:858ad20fcc63ea4b83d080",
+        "android_client_info": {
+          "package_name": "com.example.recyclomate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXLvJe61A_u35NFPeSrsc8jj9qAJt946o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
