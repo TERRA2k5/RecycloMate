@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:contentDescription="back_button"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="250dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_person">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_email"
+                        android:inputType="textEmailAddress"
+                        style="@style/txtcolo"
+                        android:textColorHint="#4a6572" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:paddingTop="20dp"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@drawable/baseline_password_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/passEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_pass"
+                        android:inputType="textPassword"
+                        style="@style/txtcolo"
+                        android:textColorHint="#4a6572" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confPasswordLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:paddingTop="20dp"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@drawable/baseline_password_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirmPassEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_confpass"
+                        android:inputType="textPassword"
+                        style="@style/txtcolo"
+                        android:textColorHint="#4a6572" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:orientation="vertical"
+                android:layout_margin="12dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonSignup"
+                    android:layout_width="match_parent"
+                    style="@style/BUTTON"
+                    android:layout_height="45dp"
+                    android:text="@string/Sign_Up"
+                    android:textColor="@color/black" />
+
+                <TextView
+                        android:id="@+id/gotosignin"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:text="@string/Already_reg"
+                        style="@style/TEXT"
+                        android:textSize="13sp"
+                        tools:ignore="TextSizeCheck" />
+
+
+                <ImageView
+                    android:id="@+id/googleSignInButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/google"/>
+
+                <TextView
+                android:id="@+id/guest"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="@string/login_as_guest_for_now"
+                style="@style/TEXT"
+                android:textSize="13sp"
+                android:layout_marginTop="40dp"
+                tools:ignore="TextSizeCheck"
+                />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
