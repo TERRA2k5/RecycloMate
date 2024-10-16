@@ -3,8 +3,8 @@ package com.example.recyclomate.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.recyclomate.UI.MapsFragment
 import com.example.recyclomate.UI.HomeFragment
-import com.example.recyclomate.UI.MapFragment
 import com.example.recyclomate.UI.ProfileFragment
 
 class ViewPagerAdpater(fragmentActivity: FragmentManager): FragmentPagerAdapter(fragmentActivity) {
@@ -15,7 +15,7 @@ class ViewPagerAdpater(fragmentActivity: FragmentManager): FragmentPagerAdapter(
     override fun getItem(position: Int): Fragment {
         when(position) {
             0 -> {
-                return MapFragment()
+                return MapsFragment()
             }
             1 -> {
                 return HomeFragment()
