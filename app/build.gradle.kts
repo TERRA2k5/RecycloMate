@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -57,4 +58,18 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.firebase.bom)
     implementation ("com.google.android.gms:play-services-auth:20.5.0")
+
+    // All:
+    implementation (libs.cloudinary.android)
+
+// Download + Preprocess:
+    implementation (libs.cloudinary.android.download)
+    implementation (libs.cloudinary.android.preprocess)
+
+    implementation (libs.glide) // Check for the latest version
+    kapt("com.github.bumptech.glide:compiler:4.15.1")
+
+    //CircleImageVBiewer
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 }
