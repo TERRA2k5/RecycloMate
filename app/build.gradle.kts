@@ -1,8 +1,12 @@
+import org.jetbrains.kotlin.fir.declarations.builder.buildScript
+import java.util.regex.Pattern.compile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -52,5 +56,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase.bom))
+    implementation (libs.circleimageview)
+
+    // All:
+    implementation (libs.cloudinary.android)
+
+// Download + Preprocess:
+    implementation (libs.cloudinary.android.download)
+    implementation (libs.cloudinary.android.preprocess)
+
+    implementation (libs.glide) // Check for the latest version
+    kapt("com.github.bumptech.glide:compiler:4.15.1")
+//    compile("io.socket:socket.io-client:0.2.1")
+
+
 }
