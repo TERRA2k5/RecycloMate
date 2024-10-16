@@ -123,9 +123,9 @@ class ProfileFragment : Fragment() {
                     override fun onSuccess(requestId: String, resultData: Map<*, *>) {
                         val url = resultData["secure_url"] as String
 
-//                        Glide.with(requireContext())
-//                            .load(url)
-//                            .into(binding.profileIMG)
+                        Glide.with(requireContext())
+                            .load(url)
+                            .into(binding.profileIMG)
 
                         Toast.makeText(context, "Upload Successful", Toast.LENGTH_SHORT).show()
                     }
