@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.MediaStore.Images
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,23 +22,25 @@ import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 import com.example.recyclomate.R
+import com.example.recyclomate.SignInActivity
 import com.example.recyclomate.databinding.FragmentProfileBinding
-
-
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    val username = "user"
     private lateinit var selectedImageUri: Uri
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var username: String? = null // Variable for username
 
-    val cloudinary = Cloudinary(
-        mapOf(
-            "cloud_name" to "YOUR_CLOUD_NAME",
-            "api_key" to "YOUR_API_KEY",
-            "secure" to true
-        )
-    )
+//    val cloudinary = Cloudinary(
+//        mapOf(
+//            "cloud_name" to "YOUR_CLOUD_NAME",
+//            "api_key" to "YOUR_API_KEY",
+//            "secure" to true
+//        )
+//    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,12 +53,37 @@ class ProfileFragment : Fragment() {
             "api_key" to "388757982669469",
             "secure" to true
         ))
+        binding.logout.setOnClickListener {
+            firebaseAuth.signOut()
+            Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
 
-        try {
-            fetchImage(username , binding.profileIMG)
+            // Redirect to SignInActivity
+            val intent = Intent(requireContext(), SignInActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
         }
-        catch (e: Exception){
-            Log.e("ProfileError" , "No pic found" , e)
+        // Initialize FirebaseAuth
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+
+        // Fetch the username from the logged-in user
+        username = user ?: "default_username" // Provide a default username if displayName is null
+
+
+
+        if(firebaseAuth.currentUser==null){
+            val imageUrl = "https://res.cloudinary.com/diy9goel9/image/upload/default_profile.jpg"
+
+            // Load the image into the provided ImageView using Glide
+            Glide.with(this)
+                .load(imageUrl)
+                .into(binding.profileIMG)
+        }else{
+            try {
+                fetchImage(username!!, binding.profileIMG) // Use non-null asserted call since username has a default value
+            } catch (e: Exception) {
+                Log.e("ProfileError", "No pic found", e)
+            }
         }
 
         binding.profileIMG.setOnClickListener {
@@ -67,26 +93,19 @@ class ProfileFragment : Fragment() {
     }
 
     private fun openImagePicker() {
-
         val builder = AlertDialog.Builder(context)
-        builder.setMessage("Do you want to change Profile Picture ?")
+        builder.setMessage("Do you want to change Profile Picture?")
 
-        builder.setPositiveButton("Yes") {
-
-                dailog, which ->
+        builder.setPositiveButton("Yes") { dialog, which ->
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             pickImageLauncher.launch(intent)
         }
 
-        builder.setNegativeButton("No") { dialog, which ->
-            dialog.cancel()
-        }
+        builder.setNegativeButton("No") { dialog, which -> dialog.cancel() }
 
         val alertDialog = builder.create()
         alertDialog.show()
-
-
     }
 
     private val pickImageLauncher = registerForActivityResult(
@@ -98,18 +117,12 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
     private fun uploadImage(uri: Uri) {
-
-//        cloudinary.uploader().destroy
-
-
         val filePath = getRealPathFromURI(uri)
         if (filePath != null) {
-
             MediaManager.get().upload(uri)
                 .unsigned("profilePic")
-                .option("public_id" , username)
+                .option("public_id", username)
                 .callback(object : UploadCallback {
                     override fun onStart(requestId: String) {
                         // Upload started
@@ -122,7 +135,6 @@ class ProfileFragment : Fragment() {
 
                     override fun onSuccess(requestId: String, resultData: Map<*, *>) {
                         val url = resultData["secure_url"] as String
-
                         Glide.with(requireContext())
                             .load(url)
                             .into(binding.profileIMG)
