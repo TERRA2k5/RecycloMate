@@ -12,4 +12,23 @@
     <string name="login_as_guest_for_now">Login as Guest for now</string>
     <string name="default_web_client_id">391586904449-mucne46rdhrn2to0k6j391pqbrsvnr4o.apps.googleusercontent.com</string>
 
+    <string name="youtube_thumbnail_desc">YouTube Video Thumbnail for Waste Management</string>
+    <string name="waste_management_overview">
+        <![CDATA[
+
+        - This includes the collection, transport, treatment, and disposal of waste, together with monitoring and regulation of the waste management process and waste-related laws, technologies, and economic mechanisms.\n
+
+        - Waste can either be solid, liquid, or gases, and each type has different methods of disposal and management.\n
+        - Waste management deals with all types of waste, including industrial, biological, household, municipal, organic, biomedical, and radioactive wastes.\n
+        - In some cases, waste can pose a threat to human health. Health issues are associated with the entire process of waste management.\n
+        - Health issues can also arise indirectly or directly: directly through the handling of solid waste, and indirectly through the consumption of water, soil, and food.\n
+        - Waste is produced by human activity, for example, the extraction and processing of raw materials.\n
+        - Waste management is intended to reduce the adverse effects of waste on human health, the environment, planetary resources, and aesthetics.\n
+
+        - The aim of waste management is to reduce the dangerous effects of such waste on the environment and human health.\n
+        - A big part of waste management deals with municipal solid waste, which is created by industrial, commercial, and household activity.\n
+        ]]>
+    </string>
+
+
 </resources>

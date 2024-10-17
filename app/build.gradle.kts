@@ -52,7 +52,6 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
-    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,5 +70,8 @@ dependencies {
 
     //CircleImageVBiewer
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 }

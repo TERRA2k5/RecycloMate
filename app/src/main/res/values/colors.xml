@@ -25,4 +25,5 @@
     <color name="rred">#FF0C0C</color>
     <color name="colorGreen">#05C30C</color>
     <color name="offwhite">#F3E4DBDB</color>
+    <color name="gray">#4D5656</color>
 </resources>
