@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.recyclomate.R
-import com.example.recyclomate.WebViewActivity
 import com.example.recyclomate.databinding.ActivityGuideBinding
 
 class GuideActivity : AppCompatActivity() {
