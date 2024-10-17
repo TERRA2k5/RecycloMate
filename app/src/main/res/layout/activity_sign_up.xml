@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_gravity="center"
+                android:layout_height="200dp"
+                android:src="@drawable/recycle_symbol"
+                android:layout_marginTop="50dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lets Recycle !!"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/userLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Type you Username"
+                    android:inputType="textEmailAddress"
+                    style="@style/txtcolo"
+                    android:textColorHint="#4a6572" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_person">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_email"
+                        android:inputType="textEmailAddress"
+                        style="@style/txtcolo"
+                        android:textColorHint="#4a6572" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passwordLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@drawable/baseline_password_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/passEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_pass"
+                        android:inputType="textPassword"
+                        style="@style/txtcolo"
+                        android:textColorHint="#4a6572" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confPasswordLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    app:passwordToggleEnabled="true"
+                    app:startIconDrawable="@drawable/baseline_password_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirmPassEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_confpass"
+                        android:inputType="textPassword"
+                        style="@style/txtcolo"
+                        android:textColorHint="#4a6572" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:orientation="vertical"
+                android:layout_margin="12dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonSignup"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/greenDark"
+                    android:layout_height="45dp"
+                    android:text="@string/Sign_Up"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

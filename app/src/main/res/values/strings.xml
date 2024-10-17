@@ -21,4 +21,14 @@
     </string>
 
 
+    <string name="hint_email">Type your Email</string>
+    <string name="hint_pass">Type Your Password</string>
+    <string name="hint_confpass">Retype Your Password</string>
+    <string name="Sign_Up">Sign Up</string>
+    <string name="Sign_In">Sign In</string>
+    <string name="Already_reg">Already Registered , Sign In!</string>
+    <string name="Not_reg">Not Registered Yet , Sign Up!</string>
+    <string name="login_as_guest_for_now">Login as Guest for now</string>
+    <string name="default_web_client_id">391586904449-mucne46rdhrn2to0k6j391pqbrsvnr4o.apps.googleusercontent.com</string>
+
 </resources>

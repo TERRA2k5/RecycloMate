@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -38,7 +39,7 @@ android {
 
     buildFeatures {
         dataBinding = true
-        viewBinding=true
+        viewBinding = true
     }
 }
 
@@ -51,10 +52,37 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.firebase.bom)
+    implementation ("com.google.android.gms:play-services-auth:20.5.0")
+
+    // All:
+    implementation (libs.cloudinary.android)
+
+// Download + Preprocess:
+    implementation (libs.cloudinary.android.download)
+    implementation (libs.cloudinary.android.preprocess)
+
+    implementation (libs.glide) // Check for the latest version
+    kapt("com.github.bumptech.glide:compiler:4.15.1")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
+
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.1.2")
+
+    //CircleImageVBiewer
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    val lifecycle_version = "2.8.6"
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 

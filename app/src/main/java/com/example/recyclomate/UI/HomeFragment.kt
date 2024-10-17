@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout using View Binding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         // Initialize the LineChart using binding
