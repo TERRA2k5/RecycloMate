@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> 645e725f8a5835079aaa150a424105df298f734d
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Optional Camera Feature Declaration -->
     <uses-feature
@@ -23,6 +27,12 @@
         android:theme="@style/Theme.RecycloMate"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+<<<<<<< HEAD
+=======
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="false" />
+>>>>>>> 645e725f8a5835079aaa150a424105df298f734d
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -36,15 +46,14 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value= "${MAP_KEY}" />
+            android:value="${MAP_KEY}" />
 
         <activity
             android:name=".SignInActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".SignUpActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ImageDisplayActivity"
             android:exported="false" />
