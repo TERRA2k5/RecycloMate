@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="#13983f">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -51,7 +52,8 @@
                         android:layout_marginBottom="20dp"
                         android:text="Username"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -66,6 +68,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="5dp"
+                        android:textColor="@color/white"
                         android:text="Congratulations on your XX Days Recycling Streak!"
                         android:textStyle="bold" />
 
@@ -76,6 +79,7 @@
                         android:layout_marginLeft="35dp"
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="40dp"
+                        android:textColor="@color/white"
                         android:text="You're doing an amazing job helping the planet! Keep it up, and let's make the world a cleaner, greener place together" />
 
                 </LinearLayout>
@@ -90,7 +94,9 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="30dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="#13983f"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -107,6 +113,7 @@
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/white"
                         android:text="Your Contributions: "
                         android:textStyle="bold" />
 
@@ -127,7 +134,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Garbage Recycled: " />
+                                android:text="Garbage Recycled: "
+                                android:textColor="@color/white"/>
 
                             <TextView
                                 android:id="@+id/tvGarbageRecycled"
@@ -135,6 +143,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="60dp"
                                 android:padding="5dp"
+                                android:textColor="@color/white"
                                 android:text="XX" />
 
                         </LinearLayout>
@@ -149,7 +158,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Pickup Requests: " />
+                                android:text="Pickup Requests: "
+                                android:textColor="@color/white"/>
 
                             <TextView
                                 android:id="@+id/tvNumberPickup"
@@ -157,7 +167,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="60dp"
                                 android:padding="5dp"
-                                android:text="XX" />
+                                android:text="XX"
+                                android:textColor="@color/white"/>
 
                         </LinearLayout>
 
@@ -176,7 +187,7 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/Sign_In"
-                android:backgroundTint="@color/greenDark"
+                android:backgroundTint="#13983f"
                 android:background="@drawable/button_background"
                 android:textColor="@color/white" />
 
