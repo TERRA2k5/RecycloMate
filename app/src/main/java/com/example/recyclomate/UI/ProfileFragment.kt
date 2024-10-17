@@ -125,12 +125,10 @@ class ProfileFragment : Fragment() {
     ) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
             selectedImageUri = result.data!!.data!!
-//            uploadImage(selectedImageUri)
+
             val profileUpdate = userProfileChangeRequest {
                 photoUri = selectedImageUri
             }
-//            val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-//            viewModel.updatePicState(true)
 
             Firebase.auth.currentUser?.updateProfile(profileUpdate)?.addOnCompleteListener {
                 Glide.with(this).load(Firebase.auth.currentUser?.photoUrl).into(binding.profileIMG)

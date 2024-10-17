@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,61 +16,140 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/imageView"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:paddingTop="20dp"
-            android:visibility="gone"
-            android:padding="15dp"
-            android:layout_marginTop="16dp" />
-
+            android:layout_height="60dp"/>
         <TextView
             android:id="@+id/editText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Another Step to Make the world  better place :)"
-            android:layout_marginTop="16dp" />
-
-        <TextView
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingTop="15dp"
-            android:text="This Garbage is Recyclable"
+            android:layout_marginTop="16dp"
+            android:textSize="25dp"
             android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:layout_marginBottom="20dp"
+            android:text="Another Step to Make the world  better place :)" />
 
-        <TextView
-            android:id="@+id/editText3"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please use maps to locate the nearest website"
-            android:layout_marginTop="8dp" />
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="16dp"
+                    android:padding="15dp"
+                    android:paddingTop="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher_round" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingTop="15dp"
+                        android:layout_gravity="center"
+                        android:text="This Garbage is Recyclable"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/editText3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Please use maps to locate the nearest Dustbin"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
 
         <Button
             android:id="@+id/uploadButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Did you recycled it?"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="16dp"
             android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_background"
             android:backgroundTint="#13983f"
-            android:textColor="@color/white"/>
+            android:text="Did you recycled it?"
+            android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/anotherTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/recycling_guide"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="How to Recycle Organic and Inorganic Waste:"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="10dp">
+            <TextView
+                android:id="@+id/organic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/organic"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="10dp">
+            <TextView
+                android:id="@+id/inorganic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/inorganic"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="10dp">
+            <TextView
+                android:id="@+id/benifit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/benifit"
+                android:textSize="18sp" />
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
 
     </LinearLayout>
 </ScrollView>

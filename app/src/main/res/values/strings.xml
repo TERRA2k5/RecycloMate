@@ -29,20 +29,19 @@
         - A big part of waste management deals with municipal solid waste, which is created by industrial, commercial, and household activity.\n
         ]]>
     </string>
-    <string name="recycling_guide">
-    How to Recycle Organic and Inorganic Waste:\n<br /><br />
-
-    • <b>Organic Waste</b>:<br />\n
-     \n - Compost kitchen scraps like vegetable peels, fruit rinds, and coffee grounds.<br />
-      \n- Use a compost bin or pile to create nutrient-rich compost for your garden.<br /><br />
-
-    \n• <b>Inorganic Waste</b>:<br />
-     \n - Separate plastics, metals, and glass.<br />
-     \n - Clean and rinse containers before recycling.<br />
-     \n - Check local recycling guidelines to know what materials are accepted.<br /><br />
-
-   \n Benefits of Recycling for a Better World:<br /><br />
-
+    <string name="organic">
+        • <b>Organic Waste</b>:<br />\n
+        \n - Compost kitchen scraps like vegetable peels, fruit rinds, and coffee grounds.<br />
+        \n- Use a compost bin or pile to create nutrient-rich compost for your garden.<br /><br />
+    </string>
+    <string name="inorganic">
+        • <b>Inorganic Waste</b>:<br />\n
+        \n - Separate plastics, metals, and glass.<br />
+        \n - Clean and rinse containers before recycling.<br />
+        \n - Check local recycling guidelines to know what materials are accepted.<br /><br />
+    </string>
+    <string name="benifit">
+        • <b>Benefits of Recycling for a Better World:</b><br/><br />\n
     \n• Reduces landfill waste and conserves natural resources.<br />
     \n• Decreases pollution and greenhouse gas emissions.<br />
     \n• Saves energy in manufacturing processes.<br />
