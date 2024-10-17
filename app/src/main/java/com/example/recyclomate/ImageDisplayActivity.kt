@@ -1,5 +1,6 @@
 package com.example.recyclomate
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +12,12 @@ import com.example.recyclomate.databinding.ActivityImageDisplayBinding
 class ImageDisplayActivity : AppCompatActivity() {
     private lateinit var binding: ActivityImageDisplayBinding
     private lateinit var imageUri: Uri
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

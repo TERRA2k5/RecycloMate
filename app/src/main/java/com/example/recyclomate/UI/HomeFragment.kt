@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.recyclomate.GuideActivity
 import com.example.recyclomate.ImageDisplayActivity
+import com.example.recyclomate.PickupActivity
 import com.example.recyclomate.R
 import com.example.recyclomate.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.charts.LineChart
@@ -26,11 +27,14 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var imageUri: Uri
+
+    private var cameraIntent: Int = 0
 
     private val daysOfWeek = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
     private var picturesClicked: MutableList<Int> = mutableListOf(2, 4, 1, 6, 10, 5, 8)
@@ -43,6 +47,7 @@ class HomeFragment : Fragment() {
 
         val lineChart: LineChart = binding.LineChart
 
+//        Toast.makeText(context, Firebase.auth.currentUser?.displayName , Toast.LENGTH_SHORT).show()
 
         lineChart.setTouchEnabled(false)
         lineChart.isDragEnabled = false
@@ -53,6 +58,12 @@ class HomeFragment : Fragment() {
         setLineChartData(lineChart)
 
         binding.camera.setOnClickListener {
+            cameraIntent = 0
+            openCamera()
+        }
+
+        binding.pickup.setOnClickListener {
+            cameraIntent = 1
             openCamera()
         }
 
@@ -101,9 +112,18 @@ class HomeFragment : Fragment() {
                 val bitmap = it.extras?.get("data") as? Bitmap
                 if (bitmap != null) {
 
-                    val displayImageIntent = Intent(requireContext(), ImageDisplayActivity::class.java)
-                    displayImageIntent.putExtra("imageBitmap", bitmap)
-                    startActivity(displayImageIntent)
+                    if (cameraIntent == 0){
+                        val displayImageIntent = Intent(requireContext(), ImageDisplayActivity::class.java)
+                        displayImageIntent.putExtra("imageBitmap", bitmap)
+                        startActivity(displayImageIntent)
+                        activity?.finish()
+                    }
+                    else{
+                        val displayImageIntent = Intent(requireContext(), PickupActivity::class.java)
+                        displayImageIntent.putExtra("imageBitmap", bitmap)
+                        startActivity(displayImageIntent)
+                        activity?.finish()
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Failed to capture image.", Toast.LENGTH_SHORT).show()
                 }

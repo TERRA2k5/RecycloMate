@@ -30,6 +30,8 @@ import com.example.recyclomate.model.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
@@ -37,18 +39,21 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var selectedImageUri: Uri
     private lateinit var firebaseAuth: FirebaseAuth
-    private var username: String? = null // Variable for username
+    private var username: String? = null
+    private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private val userRef: DatabaseReference = database.getReference("users").child(Firebase.auth.currentUser?.uid.toString())
 
 //    private var isMediaManagerInit = false
 
-//    val cloudinary = Cloudinary(
-//        mapOf(
-//            "cloud_name" to "YOUR_CLOUD_NAME",
-//            "api_key" to "YOUR_API_KEY",
-//            "secure" to true
-//        )
-//    )
 
+    override fun onStart() {
+        super.onStart()
+
+        userRef.get().addOnSuccessListener { dataSnapshot->
+            val pickCount = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
+            binding.tvNumberPickup.text = pickCount.toString()
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,14 +73,6 @@ class ProfileFragment : Fragment() {
             binding.tvName.text = "Guest"
         }
 
-        if(!viewModel.isMediaManagerInit){
-            MediaManager.init(requireContext(), mapOf(
-                "cloud_name" to "diy9goel9",
-                "api_key" to "388757982669469",
-                "secure" to true
-            ))
-            viewModel.isMediaManagerInit = true
-        }
         binding.btnLog.setOnClickListener {
             if(Firebase.auth.currentUser != null){
                 firebaseAuth.signOut()
@@ -99,21 +96,6 @@ class ProfileFragment : Fragment() {
         username = user ?: "default_username" // Provide a default username if displayName is null
 
 
-
-//        if(firebaseAuth.currentUser==null){
-//            val imageUrl = "https://res.cloudinary.com/diy9goel9/image/upload/default_profile.jpg"
-//
-//            // Load the image into the provided ImageView using Glide
-//            Glide.with(this)
-//                .load(imageUrl)
-//                .into(binding.profileIMG)
-//        }else{
-//            try {
-//                fetchImage(username!!, binding.profileIMG) // Use non-null asserted call since username has a default value
-//            } catch (e: Exception) {
-//                Log.e("ProfileError", "No pic found", e)
-//            }
-//        }
 
         binding.profileIMG.setOnClickListener {
             openImagePicker()
@@ -156,64 +138,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-//    private fun uploadImage(uri: Uri) {
-//
-//        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-//
-//        val filePath = getRealPathFromURI(uri)
-//        if (filePath != null) {
-//            MediaManager.get().upload(uri)
-//                .unsigned("profilePic")
-//                .option("public_id", username)
-//                .callback(object : UploadCallback {
-//                    override fun onStart(requestId: String) {
-//                        // Upload started
-//                        Toast.makeText(context, "Upload Started", Toast.LENGTH_SHORT).show()
-//                    }
-//
-//                    override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
-//                        // Update progress if needed
-//                    }
-//
-//                    override fun onSuccess(requestId: String, resultData: Map<*, *>) {
-//                        val url = resultData["secure_url"] as String
-//                        Glide.with(requireContext())
-//                            .load(url)
-//                            .into(binding.profileIMG)
-//
-//                        viewModel.updatePicState(true)
-//
-//                        Toast.makeText(context, "Upload Successful", Toast.LENGTH_SHORT).show()
-//                    }
-//
-//                    override fun onError(requestId: String, error: ErrorInfo) {
-//                        Toast.makeText(context, "Upload Failed: ${error.description}", Toast.LENGTH_SHORT).show()
-//                    }
-//
-//                    override fun onReschedule(requestId: String, error: ErrorInfo) {
-//                        // Reschedule if needed
-//                    }
-//                })
-//                .dispatch()
-//        } else {
-//            Toast.makeText(context, "Unable to get file path", Toast.LENGTH_SHORT).show()
-//        }
-//    }
-//
-//    private fun getRealPathFromURI(uri: Uri): String? {
-//        var path: String? = null
-//        val projection = arrayOf(MediaStore.Images.Media.DATA)
-//        val cursor = activity?.contentResolver?.query(uri, projection, null, null, null)
-//        if (cursor != null) {
-//            if (cursor.moveToFirst()) {
-//                val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-//                path = cursor.getString(columnIndex)
-//            }
-//            cursor.close()
-//        }
-//        return path
-//    }
-//
 //    private fun fetchImage(username: String, imageView: ImageView) {
 //        // Construct the URL for the image using the username as public_id
 //        val imageUrl = "https://res.cloudinary.com/diy9goel9/image/upload/profile/$username.jpg"
@@ -226,5 +150,4 @@ class ProfileFragment : Fragment() {
 //        }catch (e: Exception){
 //            binding.profileIMG.setImageResource(R.drawable.default_profile)
 //        }
-//    }
 }
