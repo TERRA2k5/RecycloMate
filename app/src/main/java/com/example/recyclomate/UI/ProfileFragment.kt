@@ -76,17 +76,6 @@ class ProfileFragment : Fragment() {
             binding.tvStreak.text = "SignIn and start tracking you Recycles !!"
         }
 
-<<<<<<< HEAD
-//        if(!viewModel.isMediaManagerInit){
-//            MediaManager.init(requireContext(), mapOf(
-//                "cloud_name" to "diy9goel9",
-//                "api_key" to "388757982669469",
-//                "secure" to true
-//            ))
-//            viewModel.isMediaManagerInit = true
-//        }
-=======
->>>>>>> e1cfe67b208ac0450a89848a592cdceb6d8d7a65
         binding.btnLog.setOnClickListener {
             if(Firebase.auth.currentUser != null){
                 firebaseAuth.signOut()
