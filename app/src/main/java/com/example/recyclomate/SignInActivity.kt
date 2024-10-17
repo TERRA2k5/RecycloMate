@@ -327,6 +327,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
     }
+<<<<<<< HEAD
 
     // Function to upload the profile photo to Cloudinary
     private fun uploadProfilePhotoToCloudinary(photoUrl: String) {
@@ -361,6 +362,8 @@ class SignInActivity : AppCompatActivity() {
             })
             .dispatch()
     }
+=======
+>>>>>>> e1cfe67b208ac0450a89848a592cdceb6d8d7a65
 
     companion object {
         private const val RC_SIGN_IN = 9001

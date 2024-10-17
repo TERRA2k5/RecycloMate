@@ -56,12 +56,21 @@ class SignUpActivity : AppCompatActivity() {
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
                                             Log.d("username", "User profile updated.")
+<<<<<<< HEAD
                                             val i = Intent(this, MainActivity::class.java)
                                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+=======
+
+                                            val i = Intent(this, MainActivity::class.java)
+>>>>>>> e1cfe67b208ac0450a89848a592cdceb6d8d7a65
                                             startActivity(i)
                                             finish()
                                         }
                                     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1cfe67b208ac0450a89848a592cdceb6d8d7a65
                             } else {
                                 Toast.makeText(this, "Account Creation failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                             }

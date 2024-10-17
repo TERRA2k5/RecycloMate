@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PickupActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Up Request:"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20sp"/>
+
+            <ImageView
+                android:id="@+id/garbageImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:src="@mipmap/ic_launcher_round"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:layout_marginLeft="30dp"
+                android:text = "• We will be recording you Current Location"/>
+
+            <EditText
+                android:id="@+id/etPin"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginRight="30dp"
+                android:paddingLeft="10dp"
+                android:hint="Enter your Pincode"
+                android:layout_marginLeft="30dp"/>
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/greenDark"
+                android:layout_marginTop="30dp"
+                android:text="Submit"
+                android:layout_gravity="center"
+                android:background="@drawable/button_background"/>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -21,9 +21,8 @@ open class MainViewModel: ViewModel() {
 //    var picState: Any? = false
 
     private val firestoreRepository: FirestoreRepository = FirestoreRepository()
-    val mydate = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24))
+
     val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-//    val yestr = dateFormat.format(mydate)
 
     val mydate1 = Date(System.currentTimeMillis())
     val today = dateFormat.format(mydate1)
@@ -88,13 +87,40 @@ open class MainViewModel: ViewModel() {
     }
 
 
-    fun getStreak(): Int{
-        var streakCount = 0
-        userRef.child("streakCount").get().addOnSuccessListener { dataSnapshot ->
-            streakCount = dataSnapshot.getValue(Int::class.java) ?: 0
+//    fun getStreak(): Int{
+//        var streakCount = 0
+//        userRef.get().addOnSuccessListener { dataSnapshot ->
+//            streakCount = dataSnapshot.getValue(Int::class.java) ?: 0
+//        }
+//        return streakCount
+//    }
+
+    fun increasePickUpCount(){
+        userRef.get().addOnSuccessListener { dataSnapshot ->
+            if (dataSnapshot.exists()){
+                var pickUp = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
+
+                val update = mapOf(
+                    "pickUp" to pickUp+1
+                )
+                userRef.setValue(update)
+            }
+            else{
+                val update = mapOf(
+                    "pickUp" to 1
+                )
+                userRef.setValue(update)
+            }
         }
-        return streakCount
     }
+
+//    fun getPickUpCount(): Int{
+//        var pickUp = 0
+//        userRef.get().addOnSuccessListener { dataSnapshot ->
+//            pickUp = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
+//        }
+//        return pickUp
+//    }
 
 
 }
