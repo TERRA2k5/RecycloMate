@@ -26,7 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.example.recyclomate.databinding.ActivitySignInBinding
+//import com.example.recyclomate.databinding.ActivitySignInBinding
 
 class SignInActivity : AppCompatActivity() {
 
