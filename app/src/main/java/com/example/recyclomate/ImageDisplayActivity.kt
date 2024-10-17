@@ -1,5 +1,6 @@
 package com.example.recyclomate
 
+import android.animation.Animator
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -15,7 +16,6 @@ class ImageDisplayActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-
         startActivity(Intent(this, MainActivity::class.java))
     }
 
@@ -36,9 +36,39 @@ class ImageDisplayActivity : AppCompatActivity() {
 
         // Hide the progress bar after loading the image
         binding.progressBar.visibility = View.GONE
+
+        // Set up the button click listener to play animation and navigate
+        binding.recycleBtn.setOnClickListener {
+            playAnimationAndNavigate()
+        }
     }
 
+    private fun playAnimationAndNavigate() {
+        // Show the Lottie animation, make it cover the entire screen
+        binding.lottieAnimationView.visibility = View.VISIBLE
+        binding.lottieAnimationView.playAnimation()
 
+        // Hide other views so the animation covers the whole screen
+        binding.imageView.visibility = View.GONE
+        binding.recycleBtn.visibility = View.GONE
+        binding.anotherTextView.visibility = View.GONE
+
+        // Add a listener to detect when the animation finishes
+        binding.lottieAnimationView.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {
+                // After the animation ends, navigate to MainActivity (or HomeFragment)
+                val intent = Intent(this@ImageDisplayActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish() // Optional: finish the current activity
+            }
+
+            override fun onAnimationCancel(animation: Animator) {}
+
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+    }
 
     private fun loadImage() {
         // Show the progress bar while loading the image
@@ -55,5 +85,4 @@ class ImageDisplayActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
         }
     }
-
 }
