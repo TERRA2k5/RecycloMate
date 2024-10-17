@@ -170,11 +170,12 @@
 
             <Button
                 android:id="@+id/btnLog"
-                style="@style/BUTTON"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/Sign_In"
+                android:backgroundTint="@color/greenDark"
+                android:background="@drawable/button_background"
                 android:textColor="@color/white" />
 
         </LinearLayout>
