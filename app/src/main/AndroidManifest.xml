@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Optional Camera Feature Declaration -->
     <uses-feature
@@ -22,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecycloMate"
         tools:targetApi="31">
-
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -36,19 +38,18 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value= "${MAP_KEY}" />
+            android:value="${MAP_KEY}" />
 
         <activity
             android:name=".SignInActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ImageDisplayActivity"
             android:exported="false" />
