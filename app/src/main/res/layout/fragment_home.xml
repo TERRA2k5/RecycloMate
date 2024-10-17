@@ -63,7 +63,8 @@ android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Upload Image"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            />
 
         <Button
             android:id="@+id/guidevideo"

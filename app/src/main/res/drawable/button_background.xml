@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Shadow Effect -->
+    <!-- Outer Border -->
     <item>
         <shape android:shape="rectangle">
             <solid android:color="@android:color/transparent"/>
@@ -9,18 +9,22 @@
                 android:left="2dp"
                 android:top="2dp"
                 android:right="2dp"
-                android:bottom="2dp" />
-
+                android:bottom="2dp"/>
             <stroke
                 android:width="1dp"
-                android:color="@color/grey"/>
+                android:color="@android:color/black"/> <!-- Black border -->
         </shape>
     </item>
-    <!-- Main Button Background -->
+    <!-- Main Button Background with Gradient -->
     <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/white"/>
+            <gradient
+                android:startColor="@android:color/holo_blue_light"
+                android:endColor="@android:color/white"
+
+                android:angle="270"/>
             <corners android:radius="16dp"/>
         </shape>
     </item>
 </layer-list>
+
