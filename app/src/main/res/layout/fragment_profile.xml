@@ -59,6 +59,7 @@
 
 
                     <TextView
+                        android:id="@+id/tvStreak"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -83,6 +84,7 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/contriCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
