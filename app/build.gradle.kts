@@ -79,4 +79,5 @@ dependencies {
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
