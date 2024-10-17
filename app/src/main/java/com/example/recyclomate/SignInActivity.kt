@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.cloudinary.Cloudinary
 import com.cloudinary.android.MediaManager
@@ -17,6 +18,7 @@ import com.cloudinary.utils.ObjectUtils
 import com.example.recyclomate.MainActivity
 import com.example.recyclomate.R
 import com.example.recyclomate.databinding.ActivitySignInBinding
+import com.example.recyclomate.model.MainViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -29,7 +31,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private var username: String? = null // Variable for username
 
     override fun onStart() {
         super.onStart()
@@ -104,10 +105,6 @@ class SignInActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-        // Back button handling
-        binding.backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -129,10 +126,7 @@ class SignInActivity : AppCompatActivity() {
 
                 firebaseAuth.signInWithCredential(credential).addOnCompleteListener { signInTask ->
                     if (signInTask.isSuccessful) {
-                        // Upload the profile photo to Cloudinary
-//                        uploadProfilePhotoToCloudinary(profilePhotoUrl)
 
-                        // Start MainActivity after successful sign-in
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {

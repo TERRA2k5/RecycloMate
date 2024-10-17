@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="black_100">#0B1215</color>
+    <color name="grey">#BDBDBD</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#5865F2</color>
     <color name="colorPrimary" >#0277bd</color>
@@ -9,7 +11,7 @@
     <color name="textColor">#121212</color>
     <color name="deeppurple">#7c4dff</color>
     <color name="yellow" >#ffb300</color>
-    <color name="green1">#00bfa5</color>
+    <color name="greenDark">#105A41</color>
     <color name="pink"> #D242EC</color>
     <color name="red">#F73F7C</color>
     <color name="lavendar">#8692f7</color>
@@ -23,6 +25,6 @@
     <color name="a">#ba86fc</color>
     <color name="b">#6200ee</color>
     <color name="rred">#FF0C0C</color>
-    <color name="colorGreen">#05C30C</color>
+    <color name="GreenLight">#C4FFA5</color>
     <color name="offwhite">#F3E4DBDB</color>
 </resources>

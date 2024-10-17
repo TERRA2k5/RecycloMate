@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -21,25 +20,42 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:contentDescription="back_button"
-                android:focusable="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_back" />
+                android:layout_width="200dp"
+                android:layout_gravity="center"
+                android:layout_height="200dp"
+                android:src="@drawable/recycle_symbol"
+                android:layout_marginTop="50dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lets Recycle !!"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="250dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/userLayout"
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Type you Username"
+                    android:inputType="textEmailAddress"
+                    style="@style/txtcolo"
+                    android:textColorHint="#4a6572" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +79,6 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/passwordLayout"
                     style="@style/LoginTextInputOuterFieldStyle"
-                    android:paddingTop="20dp"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/baseline_password_24">
 
@@ -82,7 +97,6 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/confPasswordLayout"
                     style="@style/LoginTextInputOuterFieldStyle"
-                    android:paddingTop="20dp"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/baseline_password_24">
 
@@ -106,41 +120,13 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/buttonSignup"
-                    android:layout_width="match_parent"
-                    style="@style/BUTTON"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_button_bg"
+                    android:backgroundTint="@color/greenDark"
                     android:layout_height="45dp"
                     android:text="@string/Sign_Up"
-                    android:textColor="@color/black" />
-
-                <TextView
-                        android:id="@+id/gotosignin"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:gravity="center"
-                        android:text="@string/Already_reg"
-                        style="@style/TEXT"
-                        android:textSize="13sp"
-                        tools:ignore="TextSizeCheck" />
-
-
-                <ImageView
-                    android:id="@+id/googleSignInButton"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/google"/>
-
-                <TextView
-                android:id="@+id/guest"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:text="@string/login_as_guest_for_now"
-                style="@style/TEXT"
-                android:textSize="13sp"
-                android:layout_marginTop="40dp"
-                tools:ignore="TextSizeCheck"
-                />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
         </LinearLayout>

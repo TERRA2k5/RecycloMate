@@ -68,8 +68,15 @@ dependencies {
 
     implementation (libs.glide) // Check for the latest version
     kapt("com.github.bumptech.glide:compiler:4.15.1")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.1.2")
 
     //CircleImageVBiewer
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    val lifecycle_version = "2.8.6"
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
 }
