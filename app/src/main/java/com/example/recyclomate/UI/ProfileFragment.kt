@@ -85,6 +85,7 @@ class ProfileFragment : Fragment() {
                 val intent = Intent(requireContext(), SignInActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
+                activity?.finish()
             }
             else{
                 startActivity(Intent(context , SignInActivity::class.java))

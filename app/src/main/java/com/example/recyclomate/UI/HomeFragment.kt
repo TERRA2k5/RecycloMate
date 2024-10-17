@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.recyclomate.GuideActivity
 import com.example.recyclomate.ImageDisplayActivity
 import com.example.recyclomate.R
 import com.example.recyclomate.databinding.FragmentHomeBinding
@@ -40,26 +41,23 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // Initialize the LineChart using binding
         val lineChart: LineChart = binding.LineChart
 
-        // Disable user interaction on the chart
+
         lineChart.setTouchEnabled(false)
         lineChart.isDragEnabled = false
         lineChart.setScaleEnabled(false)
         lineChart.setDrawGridBackground(false)
 
-        // Set data for the LineChart
+
         setLineChartData(lineChart)
 
-        // Set click listener for the upload image button
         binding.camera.setOnClickListener {
             openCamera()
         }
 
-        // Set click listener for the guide video button
         binding.guidevideo.setOnClickListener {
-            // Start GuideActivity
+
             val intent = Intent(requireContext(), GuideActivity::class.java)
             startActivity(intent)
         }
@@ -68,16 +66,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun openCamera() {
-        // Check for camera permission
+
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            // Permission granted, open the camera
+
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            // Ensure there's a camera activity to handle the intent
+
             if (cameraIntent.resolveActivity(requireActivity().packageManager) != null) {
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE)
             }
         } else {
-            // Request permission if not granted
+
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSION)
         }
     }
@@ -86,10 +84,10 @@ class HomeFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission was granted, open the camera
+
                 openCamera()
             } else {
-                // Permission denied
+
                 Toast.makeText(requireContext(), "Camera permission is required to take pictures.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -99,10 +97,10 @@ class HomeFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == AppCompatActivity.RESULT_OK) {
             data?.let {
-                // Get the bitmap directly from the data
+
                 val bitmap = it.extras?.get("data") as? Bitmap
                 if (bitmap != null) {
-                    // Pass the bitmap as a Parcelable
+
                     val displayImageIntent = Intent(requireContext(), ImageDisplayActivity::class.java)
                     displayImageIntent.putExtra("imageBitmap", bitmap)
                     startActivity(displayImageIntent)
