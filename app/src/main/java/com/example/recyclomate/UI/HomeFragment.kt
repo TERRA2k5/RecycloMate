@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout using View Binding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val lineChart: LineChart = binding.LineChart

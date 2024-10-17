@@ -71,6 +71,9 @@ class ProfileFragment : Fragment() {
         }
         else{
             binding.tvName.text = "Guest"
+            binding.profileIMG.isClickable = false
+            binding.contriCard.visibility = View.GONE
+            binding.tvStreak.text = "SignIn and start tracking you Recycles !!"
         }
 
         binding.btnLog.setOnClickListener {
@@ -79,10 +82,7 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
                 binding.btnLog.text = "SignIn"
                 // Redirect to SignInActivity
-                val intent = Intent(requireContext(), SignInActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                activity?.finish()
+                activity?.finishAffinity()
             }
             else{
                 startActivity(Intent(context , SignInActivity::class.java))

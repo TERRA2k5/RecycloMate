@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -38,14 +39,17 @@ class SignUpActivity : AppCompatActivity() {
             val pass = binding.passEt.text.toString()
             val confirmPass = binding.confirmPassEt.text.toString()
 
-
             if (username.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()) {
-
-                if(emailValidator(email)){
+                if (emailValidator(email)) {
                     if (pass == confirmPass) {
-                        firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {task ->
-                            if (task.isSuccessful) {
+                        // Show the ProgressBar
+                        binding.progressBar.visibility = View.VISIBLE
 
+                        firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                            // Hide the ProgressBar
+                            binding.progressBar.visibility = View.GONE
+
+                            if (task.isSuccessful) {
                                 val profileUpdate = userProfileChangeRequest {
                                     displayName = username
                                 }
@@ -54,13 +58,12 @@ class SignUpActivity : AppCompatActivity() {
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
                                             Log.d("username", "User profile updated.")
-
                                             val i = Intent(this, MainActivity::class.java)
+                                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                             startActivity(i)
                                             finish()
                                         }
                                     }
-
                             } else {
                                 Toast.makeText(this, "Account Creation failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
 
@@ -71,12 +74,10 @@ class SignUpActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(this, "Email is Invalid", Toast.LENGTH_SHORT).show()
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
             }
 
@@ -95,7 +96,7 @@ class SignUpActivity : AppCompatActivity() {
         val pattern: Pattern
         val matcher: Matcher
         val EMAIL_PATTERN: String =
-            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         pattern = Pattern.compile(EMAIL_PATTERN)
         matcher = pattern.matcher(email)
         return matcher.matches()

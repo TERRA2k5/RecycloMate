@@ -25,6 +25,9 @@
         <activity
             android:name=".PickupActivity"
             android:exported="false" />
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -44,6 +47,10 @@
             android:name="SignInActivity"
             android:exported="false"/>
         <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
             android:name="SignUpActivity"
             android:exported="false" />
         <activity
@@ -61,9 +68,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Google Maps API Key -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAP_KEY}" />
+
     </application>
 
 </manifest>

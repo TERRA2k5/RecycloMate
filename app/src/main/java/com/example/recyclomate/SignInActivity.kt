@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -25,12 +26,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.example.recyclomate.databinding.ActivitySignInBinding
 
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private var username: String? = null // Variable for username
 
     override fun onStart() {
         super.onStart()
@@ -52,6 +55,7 @@ class SignInActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+
         // Google Sign-In options
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -71,7 +75,15 @@ class SignInActivity : AppCompatActivity() {
             val pass = binding.passET.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
+                // Show the ProgressBar and disable the button
+                binding.progressBar.visibility = View.VISIBLE
+                binding.buttonSignin.isEnabled = false
+
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                    // Hide the ProgressBar and enable the button after the operation
+                    binding.progressBar.visibility = View.GONE
+                    binding.buttonSignin.isEnabled = true
+
                     if (task.isSuccessful) {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
@@ -89,6 +101,10 @@ class SignInActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
+        // Back button handling
+        // binding.backButton.setOnClickListener {
+        //     onBackPressedDispatcher.onBackPressed()
+        // }
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -110,7 +126,7 @@ class SignInActivity : AppCompatActivity() {
 
                 firebaseAuth.signInWithCredential(credential).addOnCompleteListener { signInTask ->
                     if (signInTask.isSuccessful) {
-
+                        // Start MainActivity after successful sign-in
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {

@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
-    id("kotlin-kapt")
+//    id("kotlin-kapt")
 }
 
 android {
@@ -67,7 +67,7 @@ dependencies {
     implementation (libs.cloudinary.android.preprocess)
 
     implementation (libs.glide) // Check for the latest version
-    kapt("com.github.bumptech.glide:compiler:4.15.1")
+//    kapt("com.github.bumptech.glide:compiler:4.15.1")
 
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore.ktx)
