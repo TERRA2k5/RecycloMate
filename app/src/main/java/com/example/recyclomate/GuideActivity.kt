@@ -24,7 +24,7 @@ class GuideActivity : AppCompatActivity() {
 
         // Set click listener for YouTube thumbnail
         binding.youtubeThumbnail5.setOnClickListener {
-            val videoIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+            val videoIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=4JDGFNoY-rQ"))
             startActivity(videoIntent)
         }
 
