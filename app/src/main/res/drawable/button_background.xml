@@ -5,6 +5,11 @@
         <shape android:shape="rectangle">
             <solid android:color="@android:color/transparent"/>
             <corners android:radius="16dp"/>
+            <gradient
+                android:startColor="@android:color/white"
+                android:endColor="@android:color/white"
+
+                android:angle="270"/>
             <padding
                 android:left="2dp"
                 android:top="2dp"
@@ -15,11 +20,11 @@
                 android:color="@android:color/black"/> <!-- Black border -->
         </shape>
     </item>
-    <!-- Main Button Background with Gradient -->
+
     <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="@android:color/holo_blue_light"
+                android:startColor="@android:color/white"
                 android:endColor="@android:color/white"
 
                 android:angle="270"/>
