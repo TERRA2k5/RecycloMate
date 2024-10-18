@@ -79,7 +79,8 @@ dependencies {
 
     val lifecycle_version = "2.8.6"
     // ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v240)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     // LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
@@ -87,4 +88,6 @@ dependencies {
     implementation (libs.glide.v4160)
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Gson converter
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1") // or the latest version
+
 }

@@ -1,6 +1,9 @@
 package com.example.recyclomate.instance
 
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -13,8 +16,9 @@ data class ApiResponse(
 
 interface ApiService {
     @Multipart
-    @POST("/predict")
-    suspend fun uploadImage(
-        @Part file: MultipartBody.Part
-    ): Response<ApiResponse> // Use ApiResponse instead of String
+    @POST("/predict") // Replace with your endpoint
+    fun uploadImage(
+        @Part image: MultipartBody.Part
+    ): Call<ResponseBody>
 }
+
