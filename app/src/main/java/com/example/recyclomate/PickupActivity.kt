@@ -93,6 +93,7 @@ class PickupActivity : AppCompatActivity() {
             } else if (binding.etPin.text.length == 6 && validator == 6) {
                 uploadToCloudinaryAndFirebase(image)
                 getUserLocation()
+                Toast.makeText(this, "Sent to Administration.", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {

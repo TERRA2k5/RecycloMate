@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.cloudinary.Cloudinary
 import com.cloudinary.android.MediaManager
@@ -25,8 +26,10 @@ import com.cloudinary.android.callback.UploadCallback
 import com.example.recyclomate.MainActivity
 import com.example.recyclomate.R
 import com.example.recyclomate.SignInActivity
+import com.example.recyclomate.adapter.PickupDataAdapter
 import com.example.recyclomate.databinding.FragmentProfileBinding
 import com.example.recyclomate.model.MainViewModel
+import com.example.recyclomate.model.PickupData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
@@ -41,6 +44,7 @@ class ProfileFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private var username: String? = null
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private val adapRef = database.getReference(Firebase.auth.currentUser?.uid.toString())
     private val userRef: DatabaseReference = database.getReference("users").child(Firebase.auth.currentUser?.uid.toString())
 
 //    private var isMediaManagerInit = false
@@ -51,6 +55,10 @@ class ProfileFragment : Fragment() {
 
         userRef.get().addOnSuccessListener { dataSnapshot->
             val pickCount = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
+            val total = dataSnapshot.child("totalRecycle").getValue(Int::class.java) ?: 0
+            val streak = dataSnapshot.child("streak").getValue(Int::class.java) ?: 0
+            binding.tvStreak.text = "Congratulations on your ${streak.toString()} Days Recycling Streak!"
+            binding.tvGarbageRecycled.text = total.toString()
             binding.tvNumberPickup.text = pickCount.toString()
         }
     }
@@ -94,8 +102,23 @@ class ProfileFragment : Fragment() {
 
         // Fetch the username from the logged-in user
         username = user ?: "default_username" // Provide a default username if displayName is null
-
-
+//
+//        val pickUplist = mutableListOf<PickupData>()
+//        userRef.get().addOnSuccessListener { dataSnapshot ->
+//            if (dataSnapshot.exists()) {
+//                for (i in dataSnapshot.children) {
+//                    userRef.child(i.toString()).get().addOnSuccessListener { it->
+//                        val data = i.getValue(PickupData::class.java)
+//                        pickUplist.add(data!!)
+//                    }
+//                }
+//            }
+//
+//            val adapter = PickupDataAdapter(requireContext() , pickUplist)
+//            binding.pickupRecyclerView?.adapter = adapter
+//
+//            binding.pickupRecyclerView?.layoutManager = GridLayoutManager(context, 2)
+//        }
 
         binding.profileIMG.setOnClickListener {
             openImagePicker()

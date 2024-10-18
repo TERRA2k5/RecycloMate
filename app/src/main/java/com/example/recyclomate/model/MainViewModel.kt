@@ -114,6 +114,25 @@ open class MainViewModel: ViewModel() {
         }
     }
 
+    fun totalRecycle(){
+        userRef.get().addOnSuccessListener { dataSnapshot ->
+            if (dataSnapshot.exists()){
+                var pickUp = dataSnapshot.child("totalRecycle").getValue(Int::class.java) ?: 0
+
+                val update = mapOf(
+                    "totalRecycle" to pickUp+1
+                )
+                userRef.setValue(update)
+            }
+            else{
+                val update = mapOf(
+                    "totalRecycle" to 1
+                )
+                userRef.setValue(update)
+            }
+        }
+    }
+
 //    fun getPickUpCount(): Int{
 //        var pickUp = 0
 //        userRef.get().addOnSuccessListener { dataSnapshot ->
