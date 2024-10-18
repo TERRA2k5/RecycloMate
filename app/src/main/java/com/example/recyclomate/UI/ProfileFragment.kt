@@ -43,11 +43,17 @@ class ProfileFragment : Fragment() {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val userRef: DatabaseReference = database.getReference("users").child(Firebase.auth.currentUser?.uid.toString())
 
+//    private var isMediaManagerInit = false
+
+
     override fun onStart() {
         super.onStart()
-        refreshData()
-    }
 
+        userRef.get().addOnSuccessListener { dataSnapshot->
+            val pickCount = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
+            binding.tvNumberPickup.text = pickCount.toString()
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,77 +62,46 @@ class ProfileFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        if (Firebase.auth.currentUser != null) {
-            binding.btnLog.text = "Logout"
+
+        if (Firebase.auth.currentUser != null){
+            binding.btnLog.text ="Logout"
             binding.tvName.text = Firebase.auth.currentUser?.displayName.toString()
 
-            if (Firebase.auth.currentUser?.photoUrl != null) Glide.with(this)
-                .load(Firebase.auth.currentUser?.photoUrl)
-                .into(binding.profileIMG)
-        } else {
+            if(Firebase.auth.currentUser?.photoUrl != null ) Glide.with(this).load(Firebase.auth.currentUser?.photoUrl).into(binding.profileIMG)
+        }
+        else{
             binding.tvName.text = "Guest"
             binding.profileIMG.isClickable = false
             binding.contriCard.visibility = View.GONE
-            binding.tvStreak.text = "SignIn and start tracking your Recycles !!"
+            binding.tvStreak.text = "SignIn and start tracking you Recycles !!"
         }
 
         binding.btnLog.setOnClickListener {
-            if (Firebase.auth.currentUser != null) {
+            if(Firebase.auth.currentUser != null){
                 firebaseAuth.signOut()
                 Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
                 binding.btnLog.text = "SignIn"
                 // Redirect to SignInActivity
                 activity?.finishAffinity()
-            } else {
-                startActivity(Intent(context, SignInActivity::class.java))
+            }
+            else{
+                startActivity(Intent(context , SignInActivity::class.java))
             }
         }
-
         // Initialize FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.uid
+
+        // Fetch the username from the logged-in user
+        username = user ?: "default_username" // Provide a default username if displayName is null
+
+
 
         binding.profileIMG.setOnClickListener {
             openImagePicker()
-        }
 
-        // Set up the swipe to refresh functionality
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            refreshData()
         }
-
         return binding.root
-    }
-
-    private fun refreshData() {
-        userRef.get().addOnSuccessListener { dataSnapshot ->
-            val pickCount = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
-            binding.tvNumberPickup.text = pickCount.toString()
-
-            if (Firebase.auth.currentUser?.photoUrl != null) {
-                Glide.with(this).load(Firebase.auth.currentUser?.photoUrl).into(binding.profileIMG)
-            }
-
-            if (Firebase.auth.currentUser != null) {
-                binding.btnLog.text = "Logout"
-                binding.tvName.text = Firebase.auth.currentUser?.displayName.toString()
-
-                if (Firebase.auth.currentUser?.photoUrl != null) {
-                    Glide.with(this).load(Firebase.auth.currentUser?.photoUrl).into(binding.profileIMG)
-                }
-            } else {
-                binding.tvName.text = "Guest"
-                binding.profileIMG.isClickable = false
-                binding.contriCard.visibility = View.GONE
-                binding.tvStreak.text = "SignIn and start tracking your Recycles !!"
-            }
-
-            // Stop the refreshing animation after the data is loaded
-            binding.swipeRefreshLayout.isRefreshing = false
-        }.addOnFailureListener {
-            // Handle any error if the data fails to load
-            Toast.makeText(requireContext(), "Failed to refresh data", Toast.LENGTH_SHORT).show()
-            binding.swipeRefreshLayout.isRefreshing = false
-        }
     }
 
     private fun openImagePicker() {
@@ -150,17 +125,18 @@ class ProfileFragment : Fragment() {
     ) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
             selectedImageUri = result.data!!.data!!
+//            uploadImage(selectedImageUri)
             val profileUpdate = userProfileChangeRequest {
                 photoUri = selectedImageUri
             }
+//            val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+//            viewModel.updatePicState(true)
 
             Firebase.auth.currentUser?.updateProfile(profileUpdate)?.addOnCompleteListener {
                 Glide.with(this).load(Firebase.auth.currentUser?.photoUrl).into(binding.profileIMG)
             }
         }
     }
-
-
 
 //    private fun fetchImage(username: String, imageView: ImageView) {
 //        // Construct the URL for the image using the username as public_id

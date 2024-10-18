@@ -38,7 +38,7 @@ class ImageDisplayActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.GONE
 
         // Set up the button click listener to play animation and navigate
-        binding.recycleBtn.setOnClickListener {
+        binding.uploadButton.setOnClickListener {
             playAnimationAndNavigate()
         }
     }
@@ -50,8 +50,14 @@ class ImageDisplayActivity : AppCompatActivity() {
 
         // Hide other views so the animation covers the whole screen
         binding.imageView.visibility = View.GONE
-        binding.recycleBtn.visibility = View.GONE
-        binding.anotherTextView.visibility = View.GONE
+        binding.uploadButton.visibility = View.GONE
+        binding.textviewhead.visibility = View.GONE
+        binding.organic.visibility= View.GONE
+        binding.inorganic.visibility= View.GONE
+        binding.benifit.visibility= View.GONE
+        binding.editText1.visibility= View.GONE
+        binding.editText2.visibility= View.GONE
+        binding.editText3.visibility= View.GONE
 
         // Add a listener to detect when the animation finishes
         binding.lottieAnimationView.addAnimatorListener(object : Animator.AnimatorListener {
