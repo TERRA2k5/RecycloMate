@@ -19,7 +19,6 @@ class ImageDisplayActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-
         startActivity(Intent(this, MainActivity::class.java))
     }
 
@@ -31,15 +30,15 @@ class ImageDisplayActivity : AppCompatActivity() {
         // Get the image bitmap from the intent
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        val bitmap = intent.getParcelableExtra<Bitmap>("imageBitmap")
-        bitmap?.let {
+        // Retrieve the Bitmap from the intent
 //        val bitmap = intent.getParcelableExtra<Bitmap>("imageBitmap")
-        val response = intent.getParcelableExtra<Bitmap>("output")
-        binding.editText2.text = response.toString()
+        // Retrieve the URI from the intent (assuming it's passed)
+        imageUri = intent.getParcelableExtra<Uri>("imageUri") ?: Uri.EMPTY
+
+        // Load the image into the ImageView
 //        bitmap?.let {
-            // Load the bitmap into the ImageView
 //            binding.imageView.setImageBitmap(it)
-//            binding.imageView.visibility = View.VISIBLE // Make sure to set visibility to visible
+//            binding.imageView.visibility = View.VISIBLE
 //        } ?: run {
 //            Log.e("ImageDisplayActivity", "No Image Bitmap received")
 //        }
@@ -49,7 +48,16 @@ class ImageDisplayActivity : AppCompatActivity() {
 
         // Set up the button click listener to play animation and navigate
         binding.uploadButton.setOnClickListener {
+            viewModel.totalRecycle()
+            viewModel.increaseStreak()
+
             playAnimationAndNavigate()
+        }
+
+
+        // Load the image if URI is available
+        if (imageUri != Uri.EMPTY) {
+            loadImage()
         }
     }
 
@@ -62,33 +70,29 @@ class ImageDisplayActivity : AppCompatActivity() {
         binding.imageView.visibility = View.GONE
         binding.uploadButton.visibility = View.GONE
         binding.textviewhead.visibility = View.GONE
-        binding.organic.visibility= View.GONE
-        binding.inorganic.visibility= View.GONE
-        binding.benifit.visibility= View.GONE
-        binding.editText1.visibility= View.GONE
-        binding.editText2.visibility= View.GONE
-        binding.editText3.visibility= View.GONE
+        binding.organic.visibility = View.GONE
+        binding.inorganic.visibility = View.GONE
+        binding.benifit.visibility = View.GONE
+        binding.editText1.visibility = View.GONE
+        binding.editText2.visibility = View.GONE
+        binding.editText3.visibility = View.GONE
 
-        binding.uploadButton.setOnClickListener {
-            viewModel.increaseStreak()
-            viewModel.totalRecycle()
-        }
+        // Increase the recycling streak and total recycle count
+        viewModel.increaseStreak()
+        viewModel.totalRecycle()
 
-        binding.progressBar.visibility = View.GONE
         // Add a listener to detect when the animation finishes
         binding.lottieAnimationView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {}
 
             override fun onAnimationEnd(animation: Animator) {
-                // After the animation ends, navigate to MainActivity (or HomeFragment)
+                // After the animation ends, navigate to MainActivity
                 val intent = Intent(this@ImageDisplayActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish() // Optional: finish the current activity
             }
-        // Hide the progress bar after loading the image
 
             override fun onAnimationCancel(animation: Animator) {}
-
             override fun onAnimationRepeat(animation: Animator) {}
         })
     }
@@ -97,7 +101,7 @@ class ImageDisplayActivity : AppCompatActivity() {
         // Show the progress bar while loading the image
         binding.progressBar.visibility = View.VISIBLE
 
-        // Load the image
+        // Load the image using URI
         try {
             binding.imageView.setImageURI(imageUri)
             binding.imageView.visibility = View.VISIBLE // Make sure to set visibility to visible
@@ -108,6 +112,4 @@ class ImageDisplayActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
         }
     }
-
-
 }
