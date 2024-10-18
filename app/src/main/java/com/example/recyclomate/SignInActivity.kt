@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-//import com.example.recyclomate.databinding.ActivitySignInBinding
+import com.example.recyclomate.databinding.ActivitySignInBinding
 
 class SignInActivity : AppCompatActivity() {
 
@@ -137,6 +136,40 @@ class SignInActivity : AppCompatActivity() {
                 Toast.makeText(this, "Google sign-in failed", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    // Function to upload the profile photo to Cloudinary
+    private fun uploadProfilePhotoToCloudinary(photoUrl: String) {
+        // Assuming you have initialized your Cloudinary instance
+        val uri = Uri.parse(photoUrl)
+        MediaManager.get().upload(uri)
+            .unsigned("profilePic") // Replace with your unsigned preset name
+            .option("public_id", firebaseAuth.currentUser?.uid) // Use user ID as public_id
+            .callback(object : UploadCallback {
+                override fun onStart(requestId: String) {
+                    Toast.makeText(this@SignInActivity, "Upload Started", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
+                    // Update progress if needed
+                }
+
+                override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                    val url = resultData["secure_url"] as String
+                    // Here you can save the URL to your database or use it as needed
+                    Log.d("UploadSuccess", "Profile photo uploaded successfully: $url")
+                    Toast.makeText(this@SignInActivity, "Upload Successful", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onError(requestId: String, error: ErrorInfo) {
+                    Toast.makeText(this@SignInActivity, "Upload Failed: ${error.description}", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onReschedule(requestId: String, error: ErrorInfo) {
+                    // Reschedule if needed
+                }
+            })
+            .dispatch()
     }
 
     companion object {

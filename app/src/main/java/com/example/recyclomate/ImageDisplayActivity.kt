@@ -33,12 +33,16 @@ class ImageDisplayActivity : AppCompatActivity() {
 
         val bitmap = intent.getParcelableExtra<Bitmap>("imageBitmap")
         bitmap?.let {
+//        val bitmap = intent.getParcelableExtra<Bitmap>("imageBitmap")
+        val response = intent.getParcelableExtra<Bitmap>("output")
+        binding.editText2.text = response.toString()
+//        bitmap?.let {
             // Load the bitmap into the ImageView
-            binding.imageView.setImageBitmap(it)
-            binding.imageView.visibility = View.VISIBLE // Make sure to set visibility to visible
-        } ?: run {
-            Log.e("ImageDisplayActivity", "No Image Bitmap received")
-        }
+//            binding.imageView.setImageBitmap(it)
+//            binding.imageView.visibility = View.VISIBLE // Make sure to set visibility to visible
+//        } ?: run {
+//            Log.e("ImageDisplayActivity", "No Image Bitmap received")
+//        }
 
         // Hide the progress bar after loading the image
         binding.progressBar.visibility = View.GONE

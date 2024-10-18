@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,12 +79,16 @@ dependencies {
 
     val lifecycle_version = "2.8.6"
     // ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v240)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     // LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
     implementation (libs.mpandroidchart)
     implementation (libs.glide.v4160)
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Gson converter
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1") // or the latest version
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("com.airbnb.android:lottie:6.0.0")
     implementation ("com.airbnb.android:lottie:6.0.0")
