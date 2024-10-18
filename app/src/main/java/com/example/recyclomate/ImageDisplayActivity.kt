@@ -65,6 +65,12 @@ class ImageDisplayActivity : AppCompatActivity() {
         binding.editText2.visibility= View.GONE
         binding.editText3.visibility= View.GONE
 
+        binding.uploadButton.setOnClickListener {
+            viewModel.increaseStreak()
+            viewModel.totalRecycle()
+        }
+
+        binding.progressBar.visibility = View.GONE
         // Add a listener to detect when the animation finishes
         binding.lottieAnimationView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {}
@@ -75,13 +81,8 @@ class ImageDisplayActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish() // Optional: finish the current activity
             }
-        binding.uploadButton.setOnClickListener {
-            viewModel.increaseStreak()
-            viewModel.totalRecycle()
-        }
-
         // Hide the progress bar after loading the image
-        binding.progressBar.visibility = View.GONE
+
             override fun onAnimationCancel(animation: Animator) {}
 
             override fun onAnimationRepeat(animation: Animator) {}

@@ -86,5 +86,7 @@ dependencies {
     implementation (libs.glide.v4160)
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("com.airbnb.android:lottie:6.0.0")
+    implementation ("com.airbnb.android:lottie:6.0.0")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
 }
