@@ -11,27 +11,25 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
 open class MainViewModel: ViewModel() {
 
-    var isMediaManagerInit: Boolean = false
-//    var picState: Any? = false
-
     private val firestoreRepository: FirestoreRepository = FirestoreRepository()
 
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-
-    val mydate1 = Date(System.currentTimeMillis())
-    val today = dateFormat.format(mydate1)
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val today = LocalDate.now().format(formatter)
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val userRef: DatabaseReference = database.getReference("users").child(Firebase.auth.currentUser?.uid.toString())
 
     fun increaseStreak(){
-        userRef.get().addOnSuccessListener { dataSnapshot ->
+        database.getReference("streak").child(Firebase.auth.currentUser?.uid.toString()).get().addOnSuccessListener { dataSnapshot ->
             if (dataSnapshot.exists()) {
                 val lastActionDate = dataSnapshot.child("lastActionDate").getValue(String::class.java)
                 val streakCount = dataSnapshot.child("streakCount").getValue(Int::class.java) ?: 0
@@ -62,13 +60,11 @@ open class MainViewModel: ViewModel() {
     }
 
     fun calculateDateDifference(lastDate: String, currentDate: String): Int {
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val last = sdf.parse(lastDate)
-        val current = sdf.parse(currentDate)
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val lastActivity = LocalDate.parse(lastDate, formatter)
+        val today = LocalDate.parse(currentDate, formatter)
 
-        // Calculate difference in days
-        val diffInMillis = current.time - last.time
-        return (diffInMillis / (1000 * 60 * 60 * 24)).toInt()
+        return ChronoUnit.DAYS.between(lastActivity, today).toInt()
     }
 
     fun updateStreakInFirebase(currentDate: String, streakCount: Int) {
@@ -77,7 +73,7 @@ open class MainViewModel: ViewModel() {
             "streakCount" to streakCount
         )
 
-        userRef.setValue(streakData).addOnCompleteListener { task ->
+        database.getReference("streak").child(Firebase.auth.currentUser?.uid.toString()).setValue(streakData).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 println("Streak updated successfully!")
             } else {
@@ -87,59 +83,32 @@ open class MainViewModel: ViewModel() {
     }
 
 
-//    fun getStreak(): Int{
-//        var streakCount = 0
-//        userRef.get().addOnSuccessListener { dataSnapshot ->
-//            streakCount = dataSnapshot.getValue(Int::class.java) ?: 0
-//        }
-//        return streakCount
-//    }
-
     fun increasePickUpCount(){
-        userRef.get().addOnSuccessListener { dataSnapshot ->
+        database.getReference("pickUp").child(Firebase.auth.currentUser?.uid.toString()).get().addOnSuccessListener { dataSnapshot ->
             if (dataSnapshot.exists()){
-                var pickUp = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
+                var pickUp = dataSnapshot.getValue(Int::class.java) ?: 0
 
-                val update = mapOf(
-                    "pickUp" to pickUp+1
-                )
-                userRef.setValue(update)
+                database.getReference("pickUp").child(Firebase.auth.currentUser?.uid.toString()).setValue(pickUp+1)
             }
             else{
-                val update = mapOf(
-                    "pickUp" to 1
-                )
-                userRef.setValue(update)
+                database.getReference("pickUp").child(Firebase.auth.currentUser?.uid.toString()).setValue(1)
             }
         }
     }
 
     fun totalRecycle(){
-        userRef.get().addOnSuccessListener { dataSnapshot ->
+        database.getReference("totalRecycle").child(Firebase.auth.currentUser?.uid.toString()).get().addOnSuccessListener { dataSnapshot ->
             if (dataSnapshot.exists()){
-                var pickUp = dataSnapshot.child("totalRecycle").getValue(Int::class.java) ?: 0
+                var total = dataSnapshot.getValue(Int::class.java) ?: 0
 
-                val update = mapOf(
-                    "totalRecycle" to pickUp+1
-                )
-                userRef.setValue(update)
+                database.getReference("totalRecycle").child(Firebase.auth.currentUser?.uid.toString()).setValue(total+1)
             }
             else{
-                val update = mapOf(
-                    "totalRecycle" to 1
-                )
-                userRef.setValue(update)
+
+                database.getReference("totalRecycle").child(Firebase.auth.currentUser?.uid.toString()).setValue(1)
             }
         }
     }
-
-//    fun getPickUpCount(): Int{
-//        var pickUp = 0
-//        userRef.get().addOnSuccessListener { dataSnapshot ->
-//            pickUp = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
-//        }
-//        return pickUp
-//    }
 
 
 }

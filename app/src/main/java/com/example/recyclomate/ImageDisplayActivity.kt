@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.recyclomate.databinding.ActivityImageDisplayBinding
 import com.example.recyclomate.model.MainViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ImageDisplayActivity : AppCompatActivity() {
     private lateinit var binding: ActivityImageDisplayBinding
@@ -46,10 +48,11 @@ class ImageDisplayActivity : AppCompatActivity() {
         // Hide the progress bar after loading the image
         binding.progressBar.visibility = View.GONE
 
-        // Set up the button click listener to play animation and navigate
         binding.uploadButton.setOnClickListener {
-            viewModel.totalRecycle()
-            viewModel.increaseStreak()
+            if(Firebase.auth.currentUser != null ){
+                viewModel.totalRecycle()
+                viewModel.increaseStreak()
+            }
 
             playAnimationAndNavigate()
         }

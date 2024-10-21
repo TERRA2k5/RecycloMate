@@ -45,7 +45,7 @@ class PickupActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val userRef: DatabaseReference =
-        database.getReference(Firebase.auth.currentUser?.uid.toString())
+        database.getReference("pickUpDATA").child(Firebase.auth.currentUser?.uid.toString())
     val randomKey: String = userRef.push().key.toString()
 
 
@@ -105,10 +105,8 @@ class PickupActivity : AppCompatActivity() {
 
     fun uploadToCloudinaryAndFirebase(bitmap: Bitmap) {
 
-        viewModel.increasePickUpCount()
-        var pickCount: Int? = null
+        if(Firebase.auth.currentUser != null ) viewModel.increasePickUpCount()
         userRef.get().addOnSuccessListener { dataSnapshot ->
-            pickCount = dataSnapshot.child("pickUp").getValue(Int::class.java) ?: 0
 
             val publicId = randomKey
 
