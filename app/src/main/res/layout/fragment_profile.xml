@@ -70,7 +70,7 @@
                             android:layout_marginRight="30dp"
                             android:layout_marginBottom="5dp"
                             android:textColor="@color/white"
-                            android:text="Congratulations on your XX Days Recycling Streak!"
+                            android:text=""
                             android:textStyle="bold" />
 
                         <TextView

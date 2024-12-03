@@ -160,7 +160,10 @@ class ProfileFragment : Fragment() {
                 streak = 0
             }
 
-            val string = "Congratulations on your ${streak} Days Recycling Streak!"
+            var string = "Congratulations on your ${streak} Days Recycling Streak!"
+            if(streak == 0){
+                string = "Start Recycling Now!!"
+            }
 
             binding.tvStreak.text = string
         }

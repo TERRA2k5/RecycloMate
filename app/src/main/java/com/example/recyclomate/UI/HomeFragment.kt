@@ -31,6 +31,9 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +55,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var cameraIntent: Int = 0
-
+    private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private val uid = Firebase.auth.uid.toString()
     private val daysOfWeek = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
     private var picturesClicked: MutableList<Int> = mutableListOf(2, 4, 1, 6, 10, 5, 8)
 
@@ -110,6 +114,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        UpdateUI()
 
         val lineChart: LineChart = binding.LineChart
         lineChart.setTouchEnabled(false)
@@ -371,6 +376,25 @@ class HomeFragment : Fragment() {
         lineChart.axisLeft.axisMinimum = 0f
         lineChart.axisRight.isEnabled = false
         lineChart.invalidate()
+    }
+
+    fun UpdateUI(){
+
+        database.getReference("streak").child(uid).child("streakCount").get().addOnSuccessListener {
+            val streak: Int
+            if (it.exists()) {
+                streak = it.getValue(Int::class.java) ?: 0
+            } else {
+                streak = 0
+            }
+
+            var string = "${streak} Days in a Row!!"
+            if(streak == 0){
+                string = "Start Recycling Now!!"
+            }
+
+            binding.tvStreakCnt.text = string
+        }
     }
 
     fun updateDataForNewDay(newData: Int) {

@@ -2,7 +2,6 @@ package com.example.recyclomate
 
 import android.animation.Animator
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -52,6 +51,8 @@ class ImageDisplayActivity : AppCompatActivity() {
             if(Firebase.auth.currentUser != null ){
                 viewModel.totalRecycle()
                 viewModel.increaseStreak()
+                viewModel.update7dayCount()
+                viewModel.CleanUp()
             }
 
             playAnimationAndNavigate()
@@ -80,9 +81,6 @@ class ImageDisplayActivity : AppCompatActivity() {
         binding.editText2.visibility = View.GONE
         binding.editText3.visibility = View.GONE
 
-        // Increase the recycling streak and total recycle count
-        viewModel.increaseStreak()
-        viewModel.totalRecycle()
 
         // Add a listener to detect when the animation finishes
         binding.lottieAnimationView.addAnimatorListener(object : Animator.AnimatorListener {
