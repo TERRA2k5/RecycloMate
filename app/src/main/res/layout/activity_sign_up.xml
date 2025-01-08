@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +25,7 @@
                 android:layout_height="200dp"
                 android:src="@drawable/recycle_symbol"
                 android:layout_marginTop="50dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,6 +34,20 @@
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"/>
+
+            <!-- Centering the ProgressBar -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,16 +62,15 @@
                     app:endIconMode="clear_text"
                     app:startIconDrawable="@drawable/ic_person">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/userEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Type you Username"
-                    android:inputType="textEmailAddress"
-                    style="@style/txtcolo"
-                    android:textColorHint="#4a6572" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/userEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Type your Username"
+                        android:inputType="textEmailAddress"
+                        style="@style/txtcolo"
+                        android:textColorHint="#4a6572" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailLayout"
@@ -72,9 +86,7 @@
                         android:inputType="textEmailAddress"
                         style="@style/txtcolo"
                         android:textColorHint="#4a6572" />
-
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/passwordLayout"
@@ -90,9 +102,7 @@
                         android:inputType="textPassword"
                         style="@style/txtcolo"
                         android:textColorHint="#4a6572" />
-
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/confPasswordLayout"
@@ -123,16 +133,12 @@
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/button_background"
-                    android:backgroundTint="@color/greenDark"
+                    android:backgroundTint="#13983f"
                     android:layout_height="45dp"
                     android:text="@string/Sign_Up"
                     android:textColor="@color/white" />
-
             </LinearLayout>
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

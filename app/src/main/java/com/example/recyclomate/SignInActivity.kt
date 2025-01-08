@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private var username: String? = null // Variable for username
 
     override fun onStart() {
         super.onStart()
@@ -40,16 +42,6 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
     }
-//
-//    object CloudinaryConfig {
-//        val cloudinary: Cloudinary = Cloudinary(
-//            ObjectUtils.asMap(
-//            "cloud_name", "your_cloud_name",
-//            "api_key", "your_api_key",
-//            "api_secret", "your_api_secret"
-//        ))
-//    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,16 +50,11 @@ class SignInActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-//        MediaManager.init(this@SignInActivity , mapOf(
-//            "cloud_name" to "diy9goel9",
-//            "api_key" to "388757982669469",
-//            "secure" to true
-//        )
-
         binding.gotosignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+
         // Google Sign-In options
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -87,7 +74,15 @@ class SignInActivity : AppCompatActivity() {
             val pass = binding.passET.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
+                // Show the ProgressBar and disable the button
+                binding.progressBar.visibility = View.VISIBLE
+                binding.buttonSignin.isEnabled = false
+
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                    // Hide the ProgressBar and enable the button after the operation
+                    binding.progressBar.visibility = View.GONE
+                    binding.buttonSignin.isEnabled = true
+
                     if (task.isSuccessful) {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
@@ -105,6 +100,10 @@ class SignInActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
+        // Back button handling
+        // binding.backButton.setOnClickListener {
+        //     onBackPressedDispatcher.onBackPressed()
+        // }
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -126,7 +125,7 @@ class SignInActivity : AppCompatActivity() {
 
                 firebaseAuth.signInWithCredential(credential).addOnCompleteListener { signInTask ->
                     if (signInTask.isSuccessful) {
-
+                        // Start MainActivity after successful sign-in
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
@@ -138,6 +137,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
     }
+
     // Function to upload the profile photo to Cloudinary
     private fun uploadProfilePhotoToCloudinary(photoUrl: String) {
         // Assuming you have initialized your Cloudinary instance

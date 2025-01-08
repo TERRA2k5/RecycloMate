@@ -18,13 +18,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvPeopleCnt"
                 android:layout_width="wrap_content"
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:textSize="30dp"
-
                 android:fontFamily="serif"
                 android:text="5046" />
 
@@ -48,39 +47,50 @@ android:layout_marginTop="25dp"
             android:layout_height="314dp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvStreakCnt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="monospace"
             android:layout_gravity="center"
             android:layout_marginLeft="50dp"
-            android:text="5 Days in a row!!" />
+            android:text="" />
 
         <Button
-            android:id="@+id/camera"
+            android:id="@+id/uploadML"
             android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Upload Image"
+            android:backgroundTint="#13983f"
             android:background="@drawable/button_background"
+
             />
 
         <Button
             android:id="@+id/guidevideo"
             android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Know How's"
-            android:background="@drawable/button_background"/>
+            android:layout_width="200dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:backgroundTint="#13983f"
+            android:background="@drawable/button_background"
+            />
 
         <Button
             android:id="@+id/pickup"
-            android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_background"
+            android:backgroundTint="#13983f"
             android:text="Pickup Request"
-            android:background="@drawable/button_background"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </ScrollView>

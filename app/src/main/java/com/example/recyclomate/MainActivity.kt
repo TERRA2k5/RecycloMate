@@ -1,18 +1,22 @@
 package com.example.recyclomate
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.recyclomate.adapters.ViewPagerAdpater
 import com.example.recyclomate.databinding.ActivityMainBinding
+import com.example.recyclomate.model.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        //check streak
+        viewModel.checkDayStreak()
+        viewModel.CleanUp()
+
+
 
         binding.container.adapter = ViewPagerAdpater(supportFragmentManager)
 
@@ -66,4 +77,6 @@ class MainActivity : AppCompatActivity() {
             override fun onPageScrollStateChanged(state: Int) {}
         })
     }
+
+
 }

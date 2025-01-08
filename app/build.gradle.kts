@@ -53,11 +53,12 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.firebase.bom)
-    implementation ("com.google.android.gms:play-services-auth:20.5.0")
+    implementation(platform(libs.firebase.bom))
+    implementation (libs.play.services.auth)
 
     // All:
     implementation (libs.cloudinary.android)
@@ -69,21 +70,29 @@ dependencies {
     implementation (libs.glide) // Check for the latest version
 //    kapt("com.github.bumptech.glide:compiler:4.15.1")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
-
-    implementation("com.google.firebase:firebase-database")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.1.2")
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore.ktx)
+    implementation("com.google.firebase:firebase-storage:20.0.1")
 
     //CircleImageVBiewer
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation (libs.circleimageview)
 
     val lifecycle_version = "2.8.6"
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v240)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation (libs.mpandroidchart)
+    implementation (libs.glide.v4160)
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Gson converter
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1") // or the latest version
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation ("com.airbnb.android:lottie:6.0.0")
+    implementation ("com.airbnb.android:lottie:6.0.0")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation (libs.kotlinx.coroutines.core)
 
 }
