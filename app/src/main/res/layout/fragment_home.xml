@@ -57,7 +57,7 @@ android:layout_marginTop="25dp"
             android:text="" />
 
         <Button
-            android:id="@+id/camera"
+            android:id="@+id/uploadML"
             android:layout_marginTop="40dp"
             android:layout_width="200dp"
             android:layout_gravity="center"
@@ -83,14 +83,14 @@ android:layout_marginTop="25dp"
 
         <Button
             android:id="@+id/pickup"
-            android:layout_marginTop="40dp"
             android:layout_width="200dp"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:text="Pickup Request"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
             android:background="@drawable/button_background"
-            android:backgroundTint="#13983f"/>
+            android:backgroundTint="#13983f"
+            android:text="Pickup Request"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </ScrollView>

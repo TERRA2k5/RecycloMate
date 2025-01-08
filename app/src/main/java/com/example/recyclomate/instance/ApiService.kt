@@ -9,16 +9,12 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 
-// Define your data class for the API response
-data class ApiResponse(
-    val message: String // Adjust this based on your actual API response
-)
 
 interface ApiService {
     @Multipart
-    @POST("/predict") // Replace with your endpoint
-    fun uploadImage(
+    @POST("/predict")
+    suspend fun retrofitUpload(
         @Part image: MultipartBody.Part
-    ): Call<ResponseBody>
+    ): Response<ResponseBody>
 }
 

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.recyclomate.databinding.ActivityImageDisplayBinding
@@ -31,18 +32,17 @@ class ImageDisplayActivity : AppCompatActivity() {
         // Get the image bitmap from the intent
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        // Retrieve the Bitmap from the intent
-//        val bitmap = intent.getParcelableExtra<Bitmap>("imageBitmap")
-        // Retrieve the URI from the intent (assuming it's passed)
-        imageUri = intent.getParcelableExtra<Uri>("imageUri") ?: Uri.EMPTY
 
-        // Load the image into the ImageView
-//        bitmap?.let {
-//            binding.imageView.setImageBitmap(it)
-//            binding.imageView.visibility = View.VISIBLE
-//        } ?: run {
-//            Log.e("ImageDisplayActivity", "No Image Bitmap received")
-//        }
+        imageUri = intent.getParcelableExtra<Uri>("imageUri") ?: Uri.EMPTY
+        val result = intent.extras?.get("result")
+//        Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show()
+        if(result.toString() == "Recyclable"){
+            binding.tvResult.text = "This Garbage is Recyclable"
+        }
+        else{
+            binding.tvResult.text = "This Garbage is Organic"
+        }
+
 
         // Hide the progress bar after loading the image
         binding.progressBar.visibility = View.GONE
@@ -78,7 +78,7 @@ class ImageDisplayActivity : AppCompatActivity() {
         binding.inorganic.visibility = View.GONE
         binding.benifit.visibility = View.GONE
         binding.editText1.visibility = View.GONE
-        binding.editText2.visibility = View.GONE
+        binding.tvResult.visibility = View.GONE
         binding.editText3.visibility = View.GONE
 
 
@@ -109,7 +109,6 @@ class ImageDisplayActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("ImageDisplayActivity", "Error loading image: ${e.message}")
         } finally {
-            // Hide the progress bar after loading the image
             binding.progressBar.visibility = View.GONE
         }
     }
