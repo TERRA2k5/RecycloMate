@@ -2,6 +2,8 @@ package com.example.recyclomate.model
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.recyclomate.UI.HomeFragment
+import com.github.mikephil.charting.charts.LineChart
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,6 +32,7 @@ open class MainViewModel: ViewModel() {
                 val currentStreakCount = snapshot.getValue(Int::class.java) ?: 0
                 // Increment the streak count for today
                 userRef.child(today).setValue(currentStreakCount + 1)
+//                HomeFragment().setLineChartData(lineChart)
             }
 
             override fun onCancelled(error: DatabaseError) {

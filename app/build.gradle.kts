@@ -94,5 +94,6 @@ dependencies {
     implementation ("com.airbnb.android:lottie:6.0.0")
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation (libs.kotlinx.coroutines.core)
+    implementation (libs.kotlinx.coroutines.android)
 
 }

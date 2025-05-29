@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.recyclomate.GuideActivity
 import com.example.recyclomate.ImageDisplayActivity
 import com.example.recyclomate.PickupActivity
@@ -35,11 +36,16 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 
@@ -48,6 +54,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
+import java.util.concurrent.Future
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -56,8 +63,8 @@ class HomeFragment : Fragment() {
     private var cameraIntent: Int = 0
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val uid = Firebase.auth.uid.toString()
-    private val daysOfWeek = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-    private var picturesClicked: MutableList<Int> = mutableListOf(2, 4, 1, 6, 10, 5, 8)
+//    private val daysOfWeek = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+    private var picturesClicked: MutableList<Int> = mutableListOf(0, 0, 0, 0, 0, 0, 0)
 
 
 
@@ -108,8 +115,13 @@ class HomeFragment : Fragment() {
         lineChart.isDragEnabled = false
         lineChart.setScaleEnabled(false)
         lineChart.setDrawGridBackground(false)
-
         setLineChartData(lineChart)
+
+        lifecycleScope.launch {
+            picturesClicked = getStreakGraph()
+            setLineChartData(lineChart)
+        }
+
 
         binding.uploadML.setOnClickListener {
             contract.launch("image/*")
@@ -139,7 +151,7 @@ class HomeFragment : Fragment() {
         val requestbody = file.asRequestBody("image/*".toMediaTypeOrNull())
         val part = MultipartBody.Part.createFormData("file", file.name, requestbody)
 
-        val retrofit = Retrofit.Builder().baseUrl("http://172.22.113.118:5000")
+        val retrofit = Retrofit.Builder().baseUrl("http://192.168.1.5:5000")
             .addConverterFactory(GsonConverterFactory.create()).build()
             .create(ApiService::class.java)
 
@@ -178,14 +190,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleCameraResult(bitmap: Bitmap) {
-
                 val pickupIntent = Intent(requireContext(), PickupActivity::class.java)
                 pickupIntent.putExtra("imageBitmap", bitmap)
                 startActivity(pickupIntent)
 
     }
 
-    private fun setLineChartData(lineChart: LineChart) {
+    fun setLineChartData(lineChart: LineChart) {
         val entries = mutableListOf<Entry>()
         for (i in picturesClicked.indices) {
             entries.add(Entry(i.toFloat(), picturesClicked[i].toFloat()))
@@ -195,12 +206,12 @@ class HomeFragment : Fragment() {
         dataSet.valueTextColor = resources.getColor(R.color.black, null)
         val lineData = LineData(dataSet)
         lineChart.data = lineData
-        lineChart.xAxis.valueFormatter = object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                return daysOfWeek.getOrElse(value.toInt()) { "" }
-            }
-        }
-        lineChart.xAxis.labelCount = daysOfWeek.size
+//        lineChart.xAxis.valueFormatter = object : ValueFormatter() {
+////            override fun getFormattedValue(value: Float): String {
+////                return daysOfWeek.getOrElse(value.toInt()) { "" }
+////            }
+//        }
+//        lineChart.xAxis.labelCount = daysOfWeek.size
         lineChart.axisLeft.axisMinimum = 0f
         lineChart.axisRight.isEnabled = false
         lineChart.invalidate()
@@ -225,11 +236,27 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun updateDataForNewDay(newData: Int) {
-        picturesClicked.removeAt(0)
-        picturesClicked.add(newData)
-        setLineChartData(binding.LineChart)
+    suspend fun getStreakGraph(): MutableList<Int> {
+        val uid = Firebase.auth.currentUser?.uid ?: return mutableListOf()
+        val userRef = FirebaseDatabase.getInstance().getReference("users").child(uid)
+
+        val snapshot = userRef.get().await()
+        val streakList = mutableListOf<Int>()
+
+        for (streakSnapshot in snapshot.children) {
+            val count = streakSnapshot.getValue(Int::class.java) ?: 0
+            streakList.add(count)
+//            Log.i("TTT", "$count")
+        }
+
+        return streakList
     }
+
+//    fun updateDataForNewDay(newData: Int) {
+//        picturesClicked.removeAt(0)
+//        picturesClicked.add(newData)
+//        setLineChartData(binding.LineChart)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
